@@ -1,0 +1,50 @@
+create table logintb(
+username varchar (20),
+pw varchar (20),
+
+constraint pkid primary key (username)
+);
+
+
+
+CREATE TABLE categories_table (
+    CategoryId INT PRIMARY KEY ,
+    CategoryName NVARCHAR(100)
+);
+
+
+CREATE TABLE items_table (
+    ItemId INT PRIMARY KEY,
+    ItName NVARCHAR(100),
+    Manufacturer NVARCHAR(100),
+    Price DECIMAL(10, 2),
+    Stocks INT,
+    CategoryId INT,
+    FOREIGN KEY (CategoryId) REFERENCES categories_table(CategoryId)
+);
+
+
+CREATE TABLE customers_table (
+    CustomerId INT PRIMARY KEY,
+    CustName NVARCHAR(100),
+    Gender NVARCHAR(10),
+    Phone NVARCHAR(15)
+);
+
+CREATE TABLE billings_table (
+    BillingId INT PRIMARY KEY,
+    ItemId INT,
+    CustomerId INT,
+    Quantity INT,
+    TotalPrice DECIMAL(10, 2),
+    PaymentMethod NVARCHAR(50),
+    FOREIGN KEY (ItemId) REFERENCES items_table(ItemId),
+    FOREIGN KEY (CustomerId) REFERENCES customers_table(CustomerId)
+);
+
+INSERT INTO categories_table (CategoryId, CategoryName) VALUES 
+(1, 'Cupcakes'),
+(2, 'Birthday Cakes'),
+(3, 'Wedding Cakes'),
+(4, 'Cookies'),
+(5, 'Pastries');
